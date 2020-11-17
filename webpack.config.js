@@ -14,6 +14,9 @@ module.exports = (env, options) => {
     devServer: {
       hot: true,
       port: 3000,
+      proxy: isDevelopment && {
+        '/api': 'http://localhost:8080/',
+      },
     },
     module: {
       rules: [

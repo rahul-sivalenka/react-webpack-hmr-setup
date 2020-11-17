@@ -9,15 +9,17 @@ app.use(express.urlencoded({ extended: false }));
 // parse application/json
 app.use(express.json());
 
-app.use(express.static(path.join(__dirname, '..', 'dist')));
-
 router.get('/', function (req, res) {
-  res.json({
-    data: 'Data from API',
-  });
+  res.send('Data from API');
+});
+
+router.get('/sub', function (req, res) {
+  res.send('Data from /sub API');
 });
 
 app.use('/api', router);
+
+app.use(express.static(path.join(__dirname, '..', 'dist')));
 
 const port = 8080;
 app.listen(port, () => {
