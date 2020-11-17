@@ -54,34 +54,37 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 //   ],
 // };
 
-module.exports = {
-  module: {
-    rules: [
-      {
-        test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            babelrc: false,
-            presets: ['@babel/preset-env', '@babel/preset-react'],
+module.exports = (env, options) => {
+  console.log('mode', options.mode);
+  return {
+    module: {
+      rules: [
+        {
+          test: /\.(js|jsx)$/,
+          exclude: /node_modules/,
+          use: {
+            loader: 'babel-loader',
+            options: {
+              babelrc: false,
+              presets: ['@babel/preset-env', '@babel/preset-react'],
+            },
           },
         },
-      },
-      {
-        test: /\.html$/,
-        use: [
-          {
-            loader: 'html-loader',
-          },
-        ],
-      },
+        {
+          test: /\.html$/,
+          use: [
+            {
+              loader: 'html-loader',
+            },
+          ],
+        },
+      ],
+    },
+    plugins: [
+      new HtmlWebpackPlugin({
+        template: 'public/index.html',
+        filename: './index.html',
+      }),
     ],
-  },
-  plugins: [
-    new HtmlWebpackPlugin({
-      template: 'public/index.html',
-      filename: './index.html',
-    }),
-  ],
+  };
 };
