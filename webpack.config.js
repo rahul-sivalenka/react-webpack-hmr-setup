@@ -13,6 +13,7 @@ module.exports = (env, options) => {
   return {
     devServer: {
       hot: true,
+      port: 3000,
     },
     module: {
       rules: [
